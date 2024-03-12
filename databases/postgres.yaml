@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres
+    shm_size: ${SIZE}
+    volumes:
+      - ${VOLUMEPATH}/psql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: changeme
+    ports:
+      - 9032:5432
+    networks:
+      - postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+
+networks:
+  postgres:
+    driver: bridge
