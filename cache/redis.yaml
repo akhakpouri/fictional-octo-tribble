@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+    command:
+      [
+        "redis-server",
+        "--appendonly",
+        "no",
+        "--maxmemory",
+        "100mb",
+        "--maxmemory-policy",
+        "allkeys-lru",
+      ]
+    volumes:
+      - ${VOLUMEPATH}/redis/data:/root/redis
+      - ${VOLUMEPATH}/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_DATABASES=${REDIS_DATABASES}
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          memory: 125m
