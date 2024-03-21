@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   postgres:
+    container_name: postgres
     image: postgres
     shm_size: ${SIZE}
     volumes:
