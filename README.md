@@ -45,6 +45,26 @@ docker compose up -d
 docker compose down
 ```
 
+## RabbitMq
+When working in your local environment, you have a number of options to connect to an instance of rabbitMq.
+
+### Windows users:
+Install rabbitMq as a service by following the steps mentioned in [this article](https://www.rabbitmq.com/install-windows.html).
+
+If using this option, you'll have to manage the service, and nodes manually using various commands such as `rabbitmqctl.bat start/stop`, `rabbitmq-diagnostics`, etc.
+
+### Linux users:
+Make sure that you have an instance of `docker` engine installed and running. Clone the repository, and
+
+Copy the **definitions.json.example** file by `cp .init/definitions.json.example .init/definitions.json`. The json file is ignored in git. You can customize all of your rabbitmq config changes here.
+
+Perform `sudo docker compose up -d` to create and start the container. You can access the management-ui at this point.
+
+__This will pull the latest `rabbitmq3` image from docker-hub, install the container, and start it for you.__
+
+rabbitmq uses `rabbit_password_hashing_sha256`. To has a password, use `python` to execute `python .pwd/rabbit_pass_hash.py "mypassword"`. This will provide you with the hash value of your password. You may use the hash value in the `user` object inside of the `definitions.json`.
+
+
 ### Persistence
 
 All of services outlined in this project will be using volumes as mounted data. The volumes are creatged and managed by docker. If your service gets interupted, and restarts, you would not lose your data.
