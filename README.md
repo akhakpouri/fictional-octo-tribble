@@ -7,6 +7,7 @@ Some of these components include:
 - PostgreSql
 - MongoDb
 - Redis Cache
+- RabbitMq
 
 This project uses [Docker](https://docs.docker.com/engine/) &amp; [Docker Compose](https://docs.docker.com/compose/) that allows you to bring any of the desired services to life quickly! 
 
