@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   postgres:
     container_name: postgres
@@ -8,8 +6,9 @@ services:
     volumes:
       - ${VOLUMEPATH}/psql:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: changeme
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "password@123"
     ports:
       - 9032:5432
     networks:
