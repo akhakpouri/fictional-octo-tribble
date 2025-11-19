@@ -2,6 +2,7 @@ services:
   postgres:
     container_name: postgres
     image: postgres
+    restart: unless-stopped
     shm_size: ${SIZE}
     volumes:
       - ${VOLUMEPATH}/psql:/var/lib/postgresql/data
@@ -10,17 +11,15 @@ services:
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "password@123"
     ports:
-      - 9032:5432
+      - 5432:5432
     networks:
       - postgres
-    restart: unless-stopped
     env_file:
-      - .env
+      - .psql.env
     deploy:
       resources:
         limits:
           memory: 256m
-
 networks:
   postgres:
     driver: bridge
