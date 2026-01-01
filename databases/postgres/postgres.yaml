@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     shm_size: ${SIZE}
     volumes:
-      - ${VOLUMEPATH}/psql:/var/lib/postgresql/data
+      - ${VOLUMEPATH}/psql:${PGDATA}
     environment:
       POSTGRES_DB: "postgres"
       POSTGRES_USER: "admin"
@@ -14,8 +14,6 @@ services:
       - 5432:5432
     networks:
       - postgres
-    env_file:
-      - .psql.env
     deploy:
       resources:
         limits:
