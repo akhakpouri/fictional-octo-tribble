@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     shm_size: ${SIZE}
     volumes:
-      - ${VOLUMEPATH}/psql:${PGDATA}
+      - pgdata:${PGDATA}
     environment:
       POSTGRES_DB: "postgres"
       POSTGRES_USER: "admin"
@@ -21,3 +21,10 @@ services:
 networks:
   postgres:
     driver: bridge
+volumes:
+  pgdata:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${VOLUMEPATH}
+      o: bind
