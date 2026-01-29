@@ -18,8 +18,8 @@ services:
         "allkeys-lru",
       ]
     volumes:
-      - ${VOLUMEPATH}/redis/data:/root/redis
-      - ${VOLUMEPATH}/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ${VOLUMEPATH}/data:/root/redis
+       - ${VOLUMEPATH}/redis.conf:/usr/local/etc/redis/redis.conf
     environment:
       - REDIS_PORT=${REDIS_PORT}
       - REDIS_DATABASES=${REDIS_DATABASES}
