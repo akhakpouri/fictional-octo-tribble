@@ -37,6 +37,22 @@ Stop a single service:
 docker compose -f directory/service.yaml down
 ```
 
+## Redis
+
+To connect to Redis using the CLI:
+
+1. Install the Redis CLI (if not already installed):
+```bash
+brew install redis
+```
+
+2. Connect to your Redis server:
+```bash
+redis-cli -p 6379
+```
+
+The port is configured in `cache/.env`.
+
 ## RabbitMQ
 
 To customize RabbitMQ configuration:
