@@ -1,4 +1,4 @@
 services:
-  workspace:
-    env_file:
-      - .env
+workspace:
+  env_file:
+    - .env
