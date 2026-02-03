@@ -37,6 +37,22 @@ Stop a single service:
 docker compose -f directory/service.yaml down
 ```
 
+## MongoDB
+
+Before running MongoDB, create the data directory:
+
+```bash
+mkdir -p ~/code/databases/mongo
+```
+
+MongoDB credentials are configured in `databases/mongo/.env`:
+- Root username: `root`
+- Root password: `password`
+- MongoDB Express username: `admin`
+- MongoDB Express password: `password`
+
+MongoDB Express UI is available at `http://localhost:8081` once the container is running.
+
 ## Redis
 
 To connect to Redis using the CLI:

@@ -2,7 +2,7 @@ services:
   mongodb:
     container_name: mongodb
     image: mongo:latest
-    restart: always
+    restart: unless-stopped
     ports:
       - 27017:27017
     volumes:
@@ -12,6 +12,19 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    healthcheck:
+      test: >
+        echo 'db.runCommand({ping:1}).ok' | mongosh
+        --quiet
+        -u $MONGO_INITDB_ROOT_USERNAME
+        -p $MONGO_INITDB_ROOT_PASSWORD
+        --authenticationDatabase admin
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - mongodb
   
   mongo-express:
     image: mongo-express:latest
@@ -21,7 +34,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_SERVER: 'mongodb'
+      ME_CONFIG_MONGODB_SERVER: mongodb
       ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_EXPRESS_USERNAME}
       ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_EXPRESS_PASSWORD}
     ports:
